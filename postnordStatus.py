@@ -8,7 +8,7 @@ import logging
 
 
 def getStatus(url, all = False, status = False):
-  logging.debug("Fetching status from url '{}'".format(url))
+  logging.debug("Fetching status from url '{}' with all: '{}' and status: '{}'".format(url, all, status))
   try:
     response = requests.get(url)
   except Exception as err:
@@ -18,7 +18,7 @@ def getStatus(url, all = False, status = False):
   responseJson = response.json()
   logging.debug("Got response '{}'".format(responseJson))
 
-  ## Throw exception instead
+  ## Throw exception instead?
   if 'TrackingInformationResponse' not in responseJson:
     logging.error("Got an error response, maybe the trackID dont exist?")
     if 'compositeFault' in responseJson:
@@ -43,7 +43,7 @@ def getStatus(url, all = False, status = False):
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Fetch status for a postnord package')
-  parser.add_argument('TrackID', help='The item to fetch')
+  parser.add_argument('TrackID', help='The tracking ID to fetch')
   parser.add_argument('-a', '--all', default=False, help='Return the whole json thats fetched', action='store_true')
   parser.add_argument('-v', '--verbose', default=False, help='Set logging to debug mode', action='store_true')
   parser.add_argument('-s', '--status', default=False, help='Show only a very short status string', action='store_true')
@@ -51,6 +51,7 @@ if __name__ == "__main__":
 
   if args.verbose:
     logging.basicConfig(level=logging.DEBUG)
+    logging.debug("Called with args: '{}'".format(args))
   else:
     logging.basicConfig(level=logging.ERROR)
 
