@@ -47,6 +47,7 @@ if __name__ == "__main__":
   parser.add_argument('-a', '--all', default=False, help='Return the whole json thats fetched', action='store_true')
   parser.add_argument('-v', '--verbose', default=False, help='Set logging to debug mode', action='store_true')
   parser.add_argument('-s', '--status', default=False, help='Show only a very short status string', action='store_true')
+  parser.add_argument('-l', '--locale', default="sv", help='Set the locale string (Default: "sv")')
   args = parser.parse_args()
 
   if args.verbose:
@@ -55,7 +56,7 @@ if __name__ == "__main__":
   else:
     logging.basicConfig(level=logging.ERROR)
 
-  url = "https://ds.postnord.com/v2/trackandtrace/findByIdentifier.json?id={}&locale=sv".format(args.TrackID)
+  url = "https://ds.postnord.com/v2/trackandtrace/findByIdentifier.json?id={}&locale={}".format(args.TrackID, args.locale)
 
   response = getStatus(url, args.all, args.status)
 
