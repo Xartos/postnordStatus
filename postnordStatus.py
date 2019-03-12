@@ -38,7 +38,14 @@ def getStatus(url, all = False, status = False):
     if status:
       result = responseJson['TrackingInformationResponse']['shipments'][0]['status']
     else:
+      events = responseJson['TrackingInformationResponse']['shipments'][0]['items'][0]['events']
+      locationName = ""
+      for event in events:
+          if 'locationType' in event['location']:
+            locationName = event['location']['displayName']
       result = responseJson['TrackingInformationResponse']['shipments'][0]['statusText']['header']
+      if locationName != "":
+          result += " (" + locationName + ")"
   return result
 
 if __name__ == "__main__":
