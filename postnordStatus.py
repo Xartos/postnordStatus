@@ -41,7 +41,7 @@ def getStatus(url, all = False, status = False):
       events = responseJson['TrackingInformationResponse']['shipments'][0]['items'][0]['events']
       locationName = ""
       for event in events:
-          if 'locationType' in event['location']:
+          if 'locationType' in event['location'] and event['location']['displayName'] != "PostNord":
             locationName = event['location']['displayName']
       result = responseJson['TrackingInformationResponse']['shipments'][0]['statusText']['header']
       if locationName != "":
