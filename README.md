@@ -1,6 +1,6 @@
 # Postnord shippment status fetcher
 
-Simple script that fetches a shord desctiption of the current status of a Postnord package
+Simple script that fetches a shord desctiption of the current status of a Postnord package.
 
 ## Usage
 
